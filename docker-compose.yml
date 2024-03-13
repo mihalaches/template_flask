@@ -1,6 +1,18 @@
 version: '3.8'
 
 services:
+  flask_service_db:
+    container_name: flask_service_db
+    image: mysql:8
+    ports:
+      - "3366:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    networks:
+      - flask_service_network
+    env_file:
+      - ./dev.env
+
   backend:
     container_name: flask_service
     build:
@@ -10,3 +22,13 @@ services:
       - ./:/srv/flask_app
     ports:
       - "8081:80"
+    depends_on:
+      - flask_service_db
+    networks:
+      - flask_service_network
+    links:
+      - flask_service_db:mysql
+
+networks:
+  flask_service_network:
+    driver: bridge

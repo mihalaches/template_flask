@@ -2,14 +2,16 @@ from application import app,loggerInstance
 from modules.user import handlers
 from flask import json
 from werkzeug.exceptions import HTTPException
+from lib.constants import UrlPaths
 
 _logger = loggerInstance("errors")
 ## USERS
 
-app.add_url_rule("/users/home", 'home',handlers.home, methods = ["POST"])
-app.add_url_rule("/users/get/<user_id>","get_user",handlers.get)
-app.add_url_rule("/users/get_all","get_all_users",handlers.get_all)
-app.add_url_rule("/users/add", "add_new_user", handlers.add_user)
+app.add_url_rule(f"{UrlPaths.users}/home", 'home',handlers.home, methods = ["GET"])
+app.add_url_rule(f"{UrlPaths.users}/get/<user_id>","get_user",handlers.get)
+app.add_url_rule(f"{UrlPaths.users}/get_all","get_all_users",handlers.get_all)
+app.add_url_rule(f"{UrlPaths.users}/add", "add_new_user", handlers.add_user)
+
 
 
 

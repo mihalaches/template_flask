@@ -13,3 +13,8 @@ def get(user_id:int):
     if user:
         return jsonify({"user_data":user.serialize()})
     return jsonify({"user_data":"Not found!"})
+
+def get_all():
+    all_users = User.query.all()
+    list_users = [user.serialize() for user in all_users]
+    return jsonify({"users":list_users})

@@ -12,9 +12,11 @@ services:
       - flask_service_network
     env_file:
       - ./dev.env
+    restart: always
 
   backend:
     container_name: flask_service
+    restart: always
     build:
       dockerfile: docker/Dockerfile_dev
       context: .

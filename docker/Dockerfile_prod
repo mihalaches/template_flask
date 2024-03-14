@@ -11,13 +11,17 @@ RUN apt-get clean \
 
 RUN apt-get -y install nginx \
     && apt-get -y install python3-dev \
-    && apt-get -y install build-essential
+    && apt-get -y install build-essential \
+    && apt-get -y install supervisor
 
 RUN pip install -r req.txt --src /usr/local/src
 
 COPY docker/nginx.conf /etc/nginx
+COPY docker/uwsgi.ini /etc/uwsgi/
+COPY supervisord.conf /etc/
 
 ENV APP_ENV="production"
-RUN chmod +x ./start.sh
+# RUN chmod +x ./start.sh
 
-CMD ["./start.sh"]
+# CMD ["./start.sh"]
+CMD ["/usr/bin/supervisord"]

@@ -1,9 +1,11 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker, declarative_base
+import os
 from application import app
 
+
 try:
-    engine = create_engine("mysql://root:123456@172.17.0.1:3366/flask_service_api")
+    engine = create_engine(f"mysql://{os.environ.get('MYSQL_USER')}:{os.environ.get('MYSQL_PASSWORD')}@{os.environ.get('MYSQL_DATABASE')}:3366/{os.environ.get('MYSQL_NAME')}")
     db_session = scoped_session(sessionmaker(autocommit=False,
                                             autoflush=False,
                                             bind=engine))

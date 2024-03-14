@@ -20,6 +20,8 @@ services:
       context: .
     volumes:
       - ./:/srv/flask_app
+    env_file:
+      - ./dev.env
     ports:
       - "8081:80"
     depends_on:

@@ -30,7 +30,6 @@ def get_all():
     return jsonify({"users":list_users})
 
 def add_user():
-    print(x)
     name = request.args.get('name')
     email = request.args.get('email')
     password = request.args.get('password')

@@ -19,8 +19,10 @@ class User(Base):
     
     def serialize(self):
         return {
+            "id": self.id,
             "name": self.name,
-            "email": self.email
+            "email": self.email,
+            "password": self.password
         }
     
     def save(self):

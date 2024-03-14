@@ -20,6 +20,6 @@ COPY docker/nginx.conf /etc/nginx
 COPY docker/uwsgi.ini /etc/uwsgi/
 COPY docker/supervisord.conf /etc/supervisor/conf.d/
 
-ENV APP_ENV="production"
+ENV APP_ENV="test"
 
 CMD ["/usr/bin/supervisord"]

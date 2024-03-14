@@ -1,9 +1,8 @@
 from flask import jsonify
 from models.Users import User
+from application import loggerInstance
 
-import logging
-
-_logger = logging.getLogger(__name__)
+_logger = loggerInstance("users")
 
 def home():
     _logger.info("HOME")
@@ -11,6 +10,7 @@ def home():
 
 def get(user_id:int):
     user = User.query.filter_by(id=user_id).first()
+    _logger.info(f"User found : {user.serialize()}")
     if user:
         return jsonify({"user_data":user.serialize()})
     return jsonify({"user_data":"Not found!"})

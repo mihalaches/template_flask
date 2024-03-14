@@ -6,7 +6,17 @@ import os
 
 app = Flask(__name__)
 
-logging.basicConfig(filename='record.log', level=logging.DEBUG, format=f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
+def loggerInstance(fileName : str):
+    if not os.path.exists("logs/"):
+        os.makedir("logs")
+    logger = logging.Logger(fileName)
+    logger.setLevel = logging.WARNING
+    handler = logging.FileHandler(f"logs/{fileName}.log")
+    formatter = logging.Formatter('%(asctime)s %(levelname)s %(name)s %(threadName)s %(pathname)s-%(lineno)s (in %(funcName)s): %(message)s')
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+    return logger
+
 
 DEBUG = False
 

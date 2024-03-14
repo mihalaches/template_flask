@@ -1,9 +1,8 @@
-from application import app,DEBUG
-import database
+from application import app,DEBUG,init_db
 
 try:
     app.logger.info("Application started!")
-    database.init_db()
+    init_db()
 except Exception as e:
     app.logger.exception("Db error")
 

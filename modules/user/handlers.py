@@ -6,6 +6,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 def home():
+    _logger.info("HOME")
     return jsonify({"message":"test","data":[12,32,4]})
 
 def get(user_id:int):
